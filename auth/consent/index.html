@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net; style-src 'unsafe-inline'; connect-src https://*.supabase.co; form-action 'none'; base-uri 'none'">
+<title>Smart Budget - Sign in</title>
+<style>
+  :root { color-scheme: light dark; --fg:#1b1f23; --bg:#fff; --muted:#5f6b76; --line:#d9dee3; --accent:#1a7f5a; --danger:#b42318; }
+  @media (prefers-color-scheme: dark) { :root { --fg:#e8eaed; --bg:#16181b; --muted:#9aa4ae; --line:#2e343a; --accent:#3ab784; --danger:#f97066; } }
+  [hidden] { display: none !important; }
+  body { margin:0; font:16px/1.5 system-ui, sans-serif; color:var(--fg); background:var(--bg); }
+  main { max-width:26rem; margin:0 auto; padding:2.5rem 1.25rem; }
+  h1 { font-size:1.25rem; margin:0 0 1.5rem; }
+  h2 { font-size:1.1rem; margin:0 0 .75rem; }
+  label { display:block; margin:0 0 .9rem; font-size:.9rem; color:var(--muted); }
+  input { display:block; width:100%; box-sizing:border-box; margin-top:.25rem; padding:.6rem .7rem; font:inherit; color:var(--fg); background:transparent; border:1px solid var(--line); border-radius:.5rem; }
+  button { font:inherit; padding:.6rem 1rem; margin:0 .5rem .5rem 0; border-radius:.5rem; border:1px solid var(--accent); background:var(--accent); color:#fff; cursor:pointer; }
+  button.secondary { background:transparent; color:var(--fg); border-color:var(--line); }
+  button.link { border:0; background:none; color:var(--muted); padding:0; text-decoration:underline; }
+  button:disabled { opacity:.6; cursor:default; }
+  dl { margin:1rem 0; } dt { font-size:.8rem; color:var(--muted); } dd { margin:0 0 .6rem; word-break:break-word; }
+  .warn { font-size:.9rem; color:var(--muted); } .error { color:var(--danger); }
+  #loginMsg { min-height:1.4em; font-size:.9rem; margin:.25rem 0 .75rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Smart Budget</h1>
+
+  <section id="message"><p id="messageText">Loading…</p></section>
+
+  <section id="login" hidden>
+    <h2>Sign in to continue</h2>
+    <form id="loginForm" method="post" action="#">
+      <label>Email
+        <input id="email" type="email" autocomplete="email" required>
+      </label>
+      <label>Password
+        <input id="password" type="password" autocomplete="current-password" minlength="8" required>
+      </label>
+      <p id="loginMsg" role="alert"></p>
+      <button type="submit" id="signInBtn">Sign in</button>
+      <button type="button" id="signUpBtn" class="secondary">Create account</button>
+    </form>
+  </section>
+
+  <section id="consent" hidden>
+    <h2 id="consentTitle"></h2>
+    <p>This app wants to use your Smart Budget data. You are signed in as <strong id="who"></strong>.</p>
+    <dl>
+      <dt>Requested access</dt><dd id="scopes"></dd>
+      <dt>Returns to</dt><dd id="returnTo"></dd>
+    </dl>
+    <p class="warn">Only approve if you just started connecting Smart Budget from Claude.</p>
+    <button type="button" id="approveBtn">Approve</button>
+    <button type="button" id="denyBtn" class="secondary">Deny</button>
+    <p><button type="button" id="signOutBtn" class="link">Not you? Sign out</button></p>
+  </section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.98.0/dist/umd/supabase.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
